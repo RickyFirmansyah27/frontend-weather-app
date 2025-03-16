@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'backend-weather-app-production.up.railway.app';
 
 const makeCallApi = ({
   url = "",
