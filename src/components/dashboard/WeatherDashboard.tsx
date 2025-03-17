@@ -107,6 +107,9 @@ const WeatherDashboard = () => {
             ))}
           </div>
           <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <h2 className="text-xl font-semibold">3-Hourly Weather Forecast</h2>
+            </div>
             <WeatherLineForecast latitude={params.latitude} longitude={params.longitude}/>
           </div>
         </TabsContent>
