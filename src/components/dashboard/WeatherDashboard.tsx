@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useGetCurrentWeather, useGetHistoryWeather } from '@/services/weather-service';
 import WeatherCard from './WeatherCard';
 import WeatherTable from './WeatherTable';
+import WeatherLineForecast from './WeatherForecast';
 
 // setup location
 const today = new Date();
@@ -104,6 +105,9 @@ const WeatherDashboard = () => {
                 weather={current[index]}
               />
             ))}
+          </div>
+          <div className="space-y-4">
+            <WeatherLineForecast latitude={params.latitude} longitude={params.longitude}/>
           </div>
         </TabsContent>
 

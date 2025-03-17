@@ -48,3 +48,13 @@ export const useGetListWeather = (query = {}) => {
     },
   });
 };
+
+export const useGetForecast = (query = {}) => {
+  return useQuery({
+    ...DEFAULT_QUERY_OPTIONS,
+    queryKey: ["list_weather", query],
+    queryFn: async () => {
+      return await apiGet(`${basePath}/forecast`, query);
+    },
+  });
+};
