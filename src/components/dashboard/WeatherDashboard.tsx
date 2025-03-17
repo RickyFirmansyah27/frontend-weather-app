@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { get, maxBy } from 'lodash';
 import { 
   CloudRain, 
@@ -10,27 +10,68 @@ import { useGetCurrentWeather, useGetHistoryWeather } from '@/services/weather-s
 import WeatherCard from './WeatherCard';
 import WeatherTable from './WeatherTable';
 
+// setup location
+const today = new Date();
+const startDate = new Date(today);
+startDate.setDate(today.getDate() - 30);
+
+const formatDate = (date) => {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+const startDateString = formatDate(startDate);
+const endDateString = formatDate(today);
+
+interface Coordinates {
+  longitude: number;
+  latitude: number;
+}
+
 const WeatherDashboard = () => {
-  const today = new Date();
-  const startDate = new Date(today);
-  startDate.setDate(today.getDate() - 30);
-
-  const formatDate = (date) => {
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  };
-  const startDateString = formatDate(startDate);
-  const endDateString = formatDate(today);
-
-  const params = {
+  const [error, setError] = useState(null);
+  const [params, setParams] = useState({
     include: 'daily',
     longitude: '106.8456',
     latitude: '-6.2088',
     startDate: startDateString,
     endDate: endDateString
-  };
+  });
+
+  function getLocation(): Promise<Coordinates> {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          resolve({
+            longitude: position.coords.longitude,
+            latitude: position.coords.latitude
+          });
+        },
+        (error) => reject(error)
+      );
+    });
+  }
+
+  useEffect(() => {
+    async function setupLocation() {
+      try {
+        const { longitude, latitude } = await getLocation();
+        setParams({
+          include: 'daily',
+          longitude: longitude.toString(),
+          latitude: latitude.toString(),
+          startDate: startDateString,
+          endDate: endDateString
+        });
+      } catch (error) {
+        console.error('Geolocation error:', error);
+        setError(error);
+      }
+    }
+    
+    setupLocation();
+  }, []);
 
   const { data: historyWeatherList, isLoading } = useGetHistoryWeather(params);
   const history = get(historyWeatherList, 'data.data', []);
