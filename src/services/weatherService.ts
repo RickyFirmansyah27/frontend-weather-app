@@ -33,6 +33,7 @@ export interface WeatherList {
   temperature: string,
   humidity: string,
   windspeed: string,
+  windSpeed: string,
   precipitation: string
 }
 
