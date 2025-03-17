@@ -23,6 +23,7 @@ export interface WeatherHistory {
   temperature: string,
   humidity: string,
   windSpeed: string,
+  windspeed: number;
   precipitation: string
 }
 
@@ -30,6 +31,7 @@ export interface WeatherList {
   location: string,
   time: string,
   condition: string,
+  country: string;
   temperature: string,
   humidity: string,
   windspeed: string,

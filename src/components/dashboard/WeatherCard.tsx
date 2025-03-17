@@ -10,11 +10,11 @@ import {
   Droplets,
   Pin,
 } from 'lucide-react';
-import { WeatherData } from '@/services/weatherService';
+import { WeatherList } from '@/services/weatherService';
 
 interface WeatherCardProps {
-  weather: WeatherData;
-  onSave?: (weather: WeatherData) => void;
+  weather: WeatherList;
+  onSave?: (weather: WeatherList) => void;
   onRemove?: (location: string) => void;
 }
 
@@ -68,7 +68,7 @@ const WeatherCard = ({ weather }: WeatherCardProps) => {
         <div className="grid grid-cols-3 gap-3 w-full">
           <div className="flex flex-col items-center">
             <Wind size={16} className="text-muted-foreground mb-1" />
-            <span className="text-sm font-medium">{weather.windSpeed}</span>
+            <span className="text-sm font-medium">{weather.windspeed ||weather.windSpeed}</span>
             <span className="text-xs text-muted-foreground">Wind</span>
           </div>
           

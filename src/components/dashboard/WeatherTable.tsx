@@ -213,7 +213,7 @@ const WeatherTable = ({ weatherData, onSave, onRemove }: WeatherTableProps) => {
                     </TableCell>
                     <TableCell>{weather.temperature}</TableCell>
                     <TableCell>{weather.humidity}</TableCell>
-                    <TableCell>{weather.windSpeed}</TableCell>
+                    <TableCell>{weather.windspeed ||weather.windSpeed}</TableCell>
                     <TableCell>{weather.precipitation}%</TableCell>
                   </TableRow>
                 ))
