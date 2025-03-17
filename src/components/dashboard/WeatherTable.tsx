@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { 
   BookmarkCheck, 
@@ -50,8 +49,11 @@ const WeatherTable = ({ weatherData, onSave, onRemove }: WeatherTableProps) => {
     }
   };
   
+  // Ensure weatherData is an array, fallback to empty array if not
+  const safeWeatherData = Array.isArray(weatherData) ? weatherData : [];
+
   // Filter and sort the weather data
-  const filteredAndSortedData = weatherData
+  const filteredAndSortedData = safeWeatherData
     .filter(weather => 
       weather.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
       weather.condition.toLowerCase().includes(searchTerm.toLowerCase())
@@ -97,13 +99,11 @@ const WeatherTable = ({ weatherData, onSave, onRemove }: WeatherTableProps) => {
   // Handle save/remove location
   const handleSaveToggle = (weather: WeatherData) => {
     if (weather.isSaved) {
-      // Remove from saved locations
       if (onRemove) {
         onRemove(weather.location);
         toast.success(`Removed ${weather.location} from saved locations`);
       }
     } else {
-      // Save location
       if (onSave) {
         onSave(weather);
         toast.success(`Saved ${weather.location} to your locations`);
