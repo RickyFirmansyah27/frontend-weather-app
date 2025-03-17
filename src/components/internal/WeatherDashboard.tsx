@@ -78,7 +78,7 @@ const WeatherDashboard = () => {
     setActiveTab(value);
     if (value === "list") {
       // Refetch data when switching to the list tab
-      refetch();
+      refetchList();
     }
   };
 

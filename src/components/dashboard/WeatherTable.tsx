@@ -142,6 +142,7 @@ const WeatherTable = ({ weatherData, onSave, onRemove }: WeatherTableProps) => {
                     <ArrowUpDown size={14} className="ml-1" />
                   </Button>
                 </TableHead>
+                <TableHead>Time</TableHead>
                 <TableHead>Condition</TableHead>
                 <TableHead>
                   <Button
@@ -203,6 +204,7 @@ const WeatherTable = ({ weatherData, onSave, onRemove }: WeatherTableProps) => {
                     <TableCell className="font-medium">
                       {weather.location}
                     </TableCell>
+                    <TableCell>{weather.time}</TableCell>
                     <TableCell>
                       <div className="flex items-center gap-1.5">
                         {getWeatherIcon(weather.condition)}
@@ -211,8 +213,8 @@ const WeatherTable = ({ weatherData, onSave, onRemove }: WeatherTableProps) => {
                     </TableCell>
                     <TableCell>{weather.temperature}</TableCell>
                     <TableCell>{weather.humidity}</TableCell>
-                    <TableCell>{weather.windSpeed} km/h</TableCell>
-                    <TableCell>{weather.precipitation}</TableCell>
+                    <TableCell>{weather.windSpeed}</TableCell>
+                    <TableCell>{weather.precipitation}%</TableCell>
                   </TableRow>
                 ))
               )}

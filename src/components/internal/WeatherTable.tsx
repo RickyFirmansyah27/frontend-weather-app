@@ -23,11 +23,11 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { WeatherData, WeatherHistory } from '@/services/weatherService';
+import { WeatherData, WeatherList } from '@/services/weatherService';
 import { toast } from 'sonner';
 
 interface WeatherTableProps {
-  weatherData: WeatherHistory[];
+  weatherData: WeatherList[];
   onSave?: (weather: WeatherData) => void;
   onRemove?: (location: string) => void;
 }
@@ -142,6 +142,7 @@ const WeatherTable = ({ weatherData, onSave, onRemove }: WeatherTableProps) => {
                     <ArrowUpDown size={14} className="ml-1" />
                   </Button>
                 </TableHead>
+                <TableHead>Time</TableHead>
                 <TableHead>Condition</TableHead>
                 <TableHead>
                   <Button
@@ -203,6 +204,9 @@ const WeatherTable = ({ weatherData, onSave, onRemove }: WeatherTableProps) => {
                     <TableCell className="font-medium">
                       {weather.location}
                     </TableCell>
+                    <TableCell className="font-medium">
+                      {weather.time}
+                    </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-1.5">
                         {getWeatherIcon(weather.condition)}
@@ -211,7 +215,7 @@ const WeatherTable = ({ weatherData, onSave, onRemove }: WeatherTableProps) => {
                     </TableCell>
                     <TableCell>{weather.temperature}</TableCell>
                     <TableCell>{weather.humidity}</TableCell>
-                    <TableCell>{weather.windSpeed} km/h</TableCell>
+                    <TableCell>{weather.windspeed}</TableCell>
                     <TableCell>{weather.precipitation}</TableCell>
                   </TableRow>
                 ))

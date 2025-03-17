@@ -68,13 +68,13 @@ const WeatherCard = ({ weather }: WeatherCardProps) => {
         <div className="grid grid-cols-3 gap-3 w-full">
           <div className="flex flex-col items-center">
             <Wind size={16} className="text-muted-foreground mb-1" />
-            <span className="text-sm font-medium">{weather.windSpeed} km/h</span>
+            <span className="text-sm font-medium">{weather.windSpeed}</span>
             <span className="text-xs text-muted-foreground">Wind</span>
           </div>
           
           <div className="flex flex-col items-center">
             <Droplets size={16} className="text-muted-foreground mb-1" />
-            <span className="text-sm font-medium">{weather.humidity}%</span>
+            <span className="text-sm font-medium">{weather.humidity}</span>
             <span className="text-xs text-muted-foreground">Humidity</span>
           </div>
           

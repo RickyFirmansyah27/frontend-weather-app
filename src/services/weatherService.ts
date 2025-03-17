@@ -26,5 +26,15 @@ export interface WeatherHistory {
   precipitation: string
 }
 
+export interface WeatherList {
+  location: string,
+  time: string,
+  condition: string,
+  temperature: string,
+  humidity: string,
+  windspeed: string,
+  precipitation: string
+}
+
 
 
