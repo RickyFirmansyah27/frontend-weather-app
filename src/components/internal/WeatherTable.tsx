@@ -53,8 +53,8 @@ const WeatherTable = ({ weatherData, onSave, onRemove }: WeatherTableProps) => {
   // Filter and sort the weather data
   const filteredAndSortedData = weatherData
     .filter(weather => 
-      weather.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      weather.condition.toLowerCase().includes(searchTerm.toLowerCase())
+      weather?.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      weather?.condition.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .sort((a, b) => {
       const valueA = a[sortBy];
@@ -96,17 +96,17 @@ const WeatherTable = ({ weatherData, onSave, onRemove }: WeatherTableProps) => {
   
   // Handle save/remove location
   const handleSaveToggle = (weather: WeatherData) => {
-    if (weather.isSaved) {
+    if (weather?.isSaved) {
       // Remove from saved locations
       if (onRemove) {
-        onRemove(weather.location);
-        toast.success(`Removed ${weather.location} from saved locations`);
+        onRemove(weather?.location);
+        toast.success(`Removed ${weather?.location} from saved locations`);
       }
     } else {
       // Save location
       if (onSave) {
         onSave(weather);
-        toast.success(`Saved ${weather.location} to your locations`);
+        toast.success(`Saved ${weather?.location} to your locations`);
       }
     }
   };
@@ -202,21 +202,21 @@ const WeatherTable = ({ weatherData, onSave, onRemove }: WeatherTableProps) => {
                   <TableRow key={index}>
                     <TableCell className="font-medium">{index + 1}</TableCell>
                     <TableCell className="font-medium">
-                      {weather.location}
+                      {weather?.location}
                     </TableCell>
                     <TableCell className="font-medium">
-                      {weather.time}
+                      {weather?.time}
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-1.5">
-                        {getWeatherIcon(weather.condition)}
-                        <span>{weather.condition}</span>
+                        {getWeatherIcon(weather?.condition)}
+                        <span>{weather?.condition}</span>
                       </div>
                     </TableCell>
-                    <TableCell>{weather.temperature}</TableCell>
-                    <TableCell>{weather.humidity}</TableCell>
-                    <TableCell>{weather.windspeed}</TableCell>
-                    <TableCell>{weather.precipitation}</TableCell>
+                    <TableCell>{weather?.temperature}</TableCell>
+                    <TableCell>{weather?.humidity}</TableCell>
+                    <TableCell>{weather?.windspeed}</TableCell>
+                    <TableCell>{weather?.precipitation}</TableCell>
                   </TableRow>
                 ))
               )}

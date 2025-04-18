@@ -11,6 +11,7 @@ import {
   Pin,
 } from 'lucide-react';
 import { WeatherList } from '@/services/weatherService';
+import { isEmpty } from 'lodash';
 
 interface WeatherCardProps {
   weather: WeatherList;
@@ -22,7 +23,13 @@ const WeatherCard = ({ weather }: WeatherCardProps) => {
   const getWeatherIcon = () => {
     const iconProps = { size: 40, strokeWidth: 1.5, className: 'mb-2' };
     
-    const condition = weather.condition.toLowerCase();
+    let condition;
+    if (isEmpty(weather)) {
+      return condition = '';
+    }
+    else {
+      condition = weather?.condition?.toLowerCase() || '';
+    }
     
     if (condition.includes('sunny') || condition.includes('clear')) {
       return <Sun {...iconProps} className="text-weather-sunny mb-2" />;
@@ -52,35 +59,35 @@ const WeatherCard = ({ weather }: WeatherCardProps) => {
         
         {/* Temperature */}
         <h3 className="text-3xl font-bold mb-1">
-          {weather.temperature}
+          {weather?.temperature || '-'}
         </h3>
         
         {/* Condition */}
-        <p className="text-muted-foreground mb-4">{weather.condition}</p>
+        <p className="text-muted-foreground mb-4">{weather?.condition}</p>
         
         {/* Location */}
         <div className="flex items-center justify-center gap-1 mb-4">
           <Pin size={14} className="text-muted-foreground" />
-          <span className="font-medium">{weather.location}</span>
+          <span className="font-medium">{weather?.location}</span>
         </div>
         
         {/* Additional weather details */}
         <div className="grid grid-cols-3 gap-3 w-full">
           <div className="flex flex-col items-center">
             <Wind size={16} className="text-muted-foreground mb-1" />
-            <span className="text-sm font-medium">{weather.windspeed ||weather.windSpeed}</span>
+            <span className="text-sm font-medium">{weather?.windspeed ||weather?.windSpeed}</span>
             <span className="text-xs text-muted-foreground">Wind</span>
           </div>
           
           <div className="flex flex-col items-center">
             <Droplets size={16} className="text-muted-foreground mb-1" />
-            <span className="text-sm font-medium">{weather.humidity}</span>
+            <span className="text-sm font-medium">{weather?.humidity}</span>
             <span className="text-xs text-muted-foreground">Humidity</span>
           </div>
           
           <div className="flex flex-col items-center">
             <CloudRain size={16} className="text-muted-foreground mb-1" />
-            <span className="text-sm font-medium">{weather.precipitation}%</span>
+            <span className="text-sm font-medium">{weather?.precipitation}%</span>
             <span className="text-xs text-muted-foreground">Rain</span>
           </div>
         </div>
