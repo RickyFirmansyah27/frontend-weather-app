@@ -99,12 +99,14 @@ const WeatherDashboard = () => {
         <TabsContent value="saved" className="space-y-6 animate-fade-in">
            {/* High Rainfall City */}
           <div className="space-y-4">
-            {current.map((item, index) => (
-              <WeatherCard
-                key={index}
-                weather={current[index]}
-              />
-            ))}
+            {Array.isArray(current) ? (
+              current.map((item, index) => (
+                <WeatherCard key={index} weather={item} />
+              ))
+            ) : (
+              <p className="text-muted-foreground">No current weather data available.</p>
+            )}
+
           </div>
           <div className="space-y-4">
             <div className="flex items-center gap-2">
